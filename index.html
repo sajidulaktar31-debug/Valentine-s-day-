@@ -33,11 +33,12 @@
       margin-bottom: 20px;
     }
     .buttons button {
-      padding: 10px 25px;
-      margin: 10px;
-      font-size: 16px;
+      padding: 16px 40px;
+      margin: 15px;
+      font-size: 20px;
+      font-weight: bold;
       border: none;
-      border-radius: 25px;
+      border-radius: 40px;
       cursor: pointer;
       transition: 0.3s;
     }
@@ -58,27 +59,47 @@
       color: #ff3366;
       margin-top: 15px;
     }
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+    .heart {
+      position: fixed;
+      bottom: 0;
+      font-size: 24px;
+      animation: float 5s linear infinite;
+    }
   </style>
 </head>
 <body>
   <div class="card">
     <!-- Top Photo -->
-    <img src="https://i.imgur.com/8Km9tLL.jpg" alt="Love Image" id="mainImage" /><!-- Question -->
+    <img src="myphoto.jpg" alt="My Photo" id="mainImage" /><!-- Question -->
 <h2 id="question">Sagira, will you be my Valentine? ❤️</h2>
 
 <!-- Buttons -->
-<div class="buttons" id="buttons">
+<div class="buttons" id="buttons" style="position:relative;">
   <button class="yes" onclick="yesClicked()">Yes</button>
-  <button class="no" onclick="noClicked()">No</button>
+  <button class="no" id="noBtn" onclick="noClicked()">No</button>
 </div>
 
 <!-- Result -->
 <div class="result" id="result">
-  <img src="https://i.imgur.com/1Q9Z1Zm.jpg" alt="Happy Valentine" />
-  <h3>Happy Valentine's Day 💖</h3>
+  <img src="yesphoto.jpg" alt="Valentine Photo" />
+  <h3>Happy Valentine’s Day 💖</h3>
 </div>
 
-  </div>  <script>
+  </div>  <audio id="music" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio><audio id="music" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+<audio id="heartbeat">
+  <source src="heartbeat.mp3" type="audio/mpeg">
+</audio>
+<audio id="voice">
+  <source src="voice.mp3" type="audio/mpeg">
+</audio><script>
     let noCount = 0;
     const noTexts = [
       "Are you sure? 😢",
@@ -86,25 +107,58 @@
       "Think again 💔",
       "Next time? 😭",
       "Seriously? 💘",
-      "It will make me sad 😞",
-      "Last chance! 😣",
-      "You are breaking my heart 💔"
+      "Last chance! 😣"
     ];
 
     function yesClicked() {
+      document.getElementById('music').play();
+      document.getElementById('heartbeat').play();
+      document.getElementById('voice').play();
+      if (navigator.vibrate) navigator.vibrate([200,100,200]);
+      document.documentElement.requestFullscreen?.();
       document.getElementById('buttons').style.display = 'none';
       document.getElementById('question').style.display = 'none';
       document.getElementById('result').style.display = 'block';
+      launchConfetti();
+      typeWriter();
     }
 
     function noClicked() {
+      const noBtn = document.getElementById('noBtn');
+      const x = Math.random() * 300 - 150;
+      const y = Math.random() * 300 - 150;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
       const question = document.getElementById('question');
-      if (noCount < noTexts.length) {
-        question.innerText = noTexts[noCount];
-        noCount++;
-      } else {
-        question.innerText = "Ab toh Yes bol do ❤️";
+      question.innerText = noTexts[noCount % noTexts.length];
+      noCount++;
+    }
+
+    function launchConfetti() {
+      for (let i = 0; i < 40; i++) {
+        const c = document.createElement('div');
+        c.innerText = '🎉';
+        c.style.position = 'fixed';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.top = '-20px';
+        c.style.fontSize = '24px';
+        c.style.animation = 'float 4s linear';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4000);
       }
     }
-  </script></body>
+
+    function typeWriter() {
+      const text = 'From Ricky, with love 💌';
+      let i = 0;
+      const el = document.createElement('p');
+      el.style.fontSize = '20px';
+      el.style.color = '#e6005c';
+      document.getElementById('result').appendChild(el);
+      const interval = setInterval(() => {
+        el.innerText += text.charAt(i);
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 80);
+    }
+</script></body>
 </html>
