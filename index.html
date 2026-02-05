@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -74,27 +75,33 @@
 <body>
   <div class="card">
     <!-- Top Photo -->
-    <img src="myphoto.jpg" alt="My Photo" id="mainImage" /><!-- Question -->
-<h2 id="question">Sagira ❤️ Ricky</h2>
+    <img src="myphoto.jpg" alt="My Photo" id="mainImage" />
 
-<p id="subtext">“Hey Sagira 🌸
+    <!-- Question -->
+    <h2 id="question">Hey Sagira 🌸
 My heart already chose you…
-Will you be my Valentine? ❤️”</p>
-<div id="lovemeter" style="margin:15px 0;font-weight:bold;color:#e6005c;">Our Love: <span id="lovepercent">0%</span></div><!-- Buttons -->
-<div class="buttons" id="buttons" style="position:relative;">
-  <button class="yes" onclick="yesClicked()">Yes</button>
-  <button class="no" id="noBtn" onclick="noClicked()">No</button>
-</div>
+Will you be my Valentine? ❤️”</h2>
 
-<!-- Result -->
-<div class="result" id="result">
-  <img src="yesphoto.jpg" alt="Valentine Photo" />
-  <h3>Happy Valentine’s Day 💖</h3>
-</div>
+    <!-- Buttons -->
+    <div class="buttons" id="buttons" style="position:relative;">
+      <button class="yes" onclick="yesClicked()">Yes</button>
+      <button class="no" id="noBtn" onclick="noClicked()">No</button>
+    </div>
 
-  </div>  <audio id="music" loop>
+    <!-- Result -->
+    <div class="result" id="result">
+      <img src="yesphoto.jpg" alt="Valentine Photo" />
+      <h3>“Tumne Yes bola…
+aur meri duniya aur bhi khoobsurat ho gayi 💖
+Happy Valentine’s Day, Sagira ❤️”</h3>
+    </div>
+  </div>
+
+  <audio id="music" loop>
   <source src="love(256k).mp3" type="audio/mpeg">
-</audio><audio id="music" loop>
+</audio>
+
+<audio id="music" loop>
   <source src="love(256k).mp3" type="audio/mpeg">
 </audio>
 <audio id="heartbeat">
@@ -102,7 +109,9 @@ Will you be my Valentine? ❤️”</p>
 </audio>
 <audio id="voice">
   <source src="voice.mp3" type="audio/mpeg">
-</audio><script>
+</audio>
+
+<script>
     let noCount = 0;
     const noTexts = [
       "Are you sure? 😢",
@@ -114,11 +123,6 @@ Will you be my Valentine? ❤️”</p>
     ];
 
     function yesClicked() {
-      let p = 0;
-      const interval = setInterval(()=>{
-        p+=5; document.getElementById('lovepercent').innerText = p+'%';
-        if(p>=100) clearInterval(interval);
-      },50);
       document.getElementById('music').play();
       document.getElementById('heartbeat').play();
       document.getElementById('voice').play();
@@ -132,10 +136,6 @@ Will you be my Valentine? ❤️”</p>
     }
 
     function noClicked() {
-      const noBtn = document.getElementById('noBtn');
-      const yesBtn = document.querySelector('.yes');
-      yesBtn.style.transform = 'scale(1.1)';
-      setTimeout(()=>yesBtn.style.transform='scale(1)',300);
       const noBtn = document.getElementById('noBtn');
       const x = Math.random() * 300 - 150;
       const y = Math.random() * 300 - 150;
@@ -160,7 +160,8 @@ Will you be my Valentine? ❤️”</p>
     }
 
     function typeWriter() {
-      const text = 'From Ricky, with love 💌';
+      const text =“From Ricky, with endless love 💌
+Today, tomorrow, and always.” ;
       let i = 0;
       const el = document.createElement('p');
       el.style.fontSize = '20px';
@@ -172,5 +173,6 @@ Will you be my Valentine? ❤️”</p>
         if (i >= text.length) clearInterval(interval);
       }, 80);
     }
-</script></body>
+</script>
+</body>
 </html>
