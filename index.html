@@ -75,9 +75,10 @@
   <div class="card">
     <!-- Top Photo -->
     <img src="myphoto.jpg" alt="My Photo" id="mainImage" /><!-- Question -->
-<h2 id="question">Sagira, will you be my Valentine? ❤️</h2>
+<h2 id="question">Sagira ❤️ Ricky</h2>
 
-<!-- Buttons -->
+<p id="subtext">Will you be my Valentine?</p>
+<div id="lovemeter" style="margin:15px 0;font-weight:bold;color:#e6005c;">Our Love: <span id="lovepercent">0%</span></div><!-- Buttons -->
 <div class="buttons" id="buttons" style="position:relative;">
   <button class="yes" onclick="yesClicked()">Yes</button>
   <button class="no" id="noBtn" onclick="noClicked()">No</button>
@@ -111,6 +112,11 @@
     ];
 
     function yesClicked() {
+      let p = 0;
+      const interval = setInterval(()=>{
+        p+=5; document.getElementById('lovepercent').innerText = p+'%';
+        if(p>=100) clearInterval(interval);
+      },50);
       document.getElementById('music').play();
       document.getElementById('heartbeat').play();
       document.getElementById('voice').play();
@@ -124,6 +130,10 @@
     }
 
     function noClicked() {
+      const noBtn = document.getElementById('noBtn');
+      const yesBtn = document.querySelector('.yes');
+      yesBtn.style.transform = 'scale(1.1)';
+      setTimeout(()=>yesBtn.style.transform='scale(1)',300);
       const noBtn = document.getElementById('noBtn');
       const x = Math.random() * 300 - 150;
       const y = Math.random() * 300 - 150;
